@@ -1,11 +1,12 @@
 import React from 'react'
 import Message from './Message'
 
-const MessageList = () => {
+const MessageList = ({messageList}) => {
     return (
-    <div>
-        <Message />
-    </div>
+        <div>
+            {messageList.map((messages) => <Message message = {messages} /> )}
+            
+        </div>
     );
 };
 

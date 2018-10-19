@@ -5,10 +5,16 @@ import Toolbar from './components/Toolbar'
 import NewMessage from './components/NewMessage'
 
 class App extends Component {
-  componentDidMount () {
-    fetch('http://localhost:8082/api/messages')
-    .then(response => response.json())
-    .then(data => console.log(data))
+
+  state = {
+    messageList:[]
+  }
+
+  async componentDidMount () {
+    const response =  await fetch ('http://localhost:8082/api/messages')
+    const json = await response.json()
+    this.setState({messageList: json})
+    console.log(json)
   }
 
   render() {
@@ -16,7 +22,7 @@ class App extends Component {
       <div className="App">
         <Toolbar />
         <NewMessage />
-        <MessageList />
+        <MessageList messageList = {this.state.messageList} />
       </div>
     )
   }
